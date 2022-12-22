@@ -9,7 +9,7 @@
 
 # define PHILOS 5
 # define DELAY 5000
-# define FOOD 50
+# define FOOD 10
 
 void	*philosopher(void *id);
 void	grab_chopstick(int, int, char *);

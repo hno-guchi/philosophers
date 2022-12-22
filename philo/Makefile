@@ -3,7 +3,9 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = main.c
+SRCS = main.c \
+	   ft_atoi.c \
+	   initialize_time.c is_collect_value.c
 
 INCLUDES_DIR = ./includes
 SRCS_DIR = ./srcs
@@ -17,13 +19,13 @@ OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
 all: $(NAME)
 
 $(NAME): $(OBJS_DIR) $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) -L$(LIBFT_DIR) $(LIBFT_LIB)
+	$(CC) $(CFLAGS) -o $@ $(OBJS)
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	$(CC) $(CFLAGS) -c $(INCLUDE) $(LIBFT_INCLUDE) $< -o $@
+	$(CC) $(CFLAGS) -c $(INCLUDE) $< -o $@
 
 bonus: all
 

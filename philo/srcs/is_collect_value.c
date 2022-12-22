@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_collect_value.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnoguchi <hnoguchi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 19:10:14 by hnoguchi          #+#    #+#             */
-/*   Updated: 2022/12/22 12:15:33 by hnoguchi         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:59:37 by hnoguchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pthread.h>
+#include "philo.h"
 
-int	print_error_message(char *message)
+bool	is_collect_value(t_time *rules)
 {
-	printf("%s\n", message);
-	return (0);
-}
-
-int	main(int argc, char *argv)
-{
-	if (argc < 5 || 6 < argc)
+	if (rules->num_philos <= 0)
 	{
-		return (print_error_message("Wrong argument!!"));
+		return (false);
 	}
-	// initialize_philo(argv);
-	// execute_philo
-	// finish_philo
-	return (0);
+	if (rules->time_die <= 0)
+	{
+		return (false);
+	}
+	if (rules->time_eat <= 0)
+	{
+		return (false);
+	}
+	if (rules->time_sleep <= 0)
+	{
+		return (false);
+	}
+	if (rules->num_must_eat != -1)
+	{
+		if (rules->num_must_eat <= 0)
+		{
+			return (false);
+		}
+	}
+	return (true);
 }
