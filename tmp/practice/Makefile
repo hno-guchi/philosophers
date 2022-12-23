@@ -13,3 +13,6 @@ data_race_create:
 
 data_race_join:
 	$(CC) $(THREAD_FLAG) join.c
+
+sample_v2:
+	$(CC) $(THREAD_FLAG) sample_v2.c

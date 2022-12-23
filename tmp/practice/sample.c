@@ -32,7 +32,11 @@ int	main(int args, char **argv)
 	pthread_mutex_init(&food_lock, NULL);
 	for (i = 0; i < PHILOS; i++)
 	{
-		pthread_create(&philo[i], NULL, philosopher, (void *)i);
+		pthread_mutex_init(&chopstick[i], NULL);
+	}
+	for (i = 0; i < PHILOS; i++)
+	{
+		pthread_create(&philo[i], NULL, philosopher, (void *)&i);
 	}
 	for (i = 0; i < PHILOS; i++)
 	{
@@ -51,7 +55,7 @@ void	*philosopher(void *num)
 
 	i = 0;
 	f = 0;
-	id = (int)num;
+	id = *(int *)num;
 	right_chopstick = id;
 	left_chopstick = id + 1;
 	printf("Philo [%d] is thinking.\n", id);
@@ -63,7 +67,8 @@ void	*philosopher(void *num)
 	while ((f = food_on_table()))
 	{
 		// 箸を取る前にうたた寝をする哲学者１のおかげで、他の哲学者は、デッドロックに陥ることなく食事ができる。
-		if (id == 1)
+		// if (id == 1)
+		if ((id % 2) != 0)
 		{
 			sleep(sleep_seconds);
 		}
