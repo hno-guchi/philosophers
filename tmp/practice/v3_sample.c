@@ -94,8 +94,7 @@ void	*philosopher(void *data)
 		}
 		pass_time = (long long)((time.tv_sec * 1000) + (time.tv_usec / 1000)); 
 		printf("%lld	%d	has taken a fork.\n", pass_time - philo->info->times.time_start, philo->index);
-		printf("%lld	%d	has taken a fork.", pass_time - philo->info->times.time_start, philo->index);
-		printf("\n");
+		printf("%lld	%d	has taken a fork.\n", pass_time - philo->info->times.time_start, philo->index);
 		printf(GREEN"%lld	%d	is eating."END, pass_time - philo->info->times.time_start, philo->index);
 		printf("\n");
 		usleep(DELAY * (philo->info->times.least_eat - f + 1));
