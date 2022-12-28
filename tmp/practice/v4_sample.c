@@ -26,10 +26,10 @@ typedef struct s_times {
 
 typedef struct	s_philo {
 	int				index;
-	pthread_t		thread_id;
 	int				count_eat;
 	long long		time_last_eat;
 	struct s_info	*info;
+	pthread_t		thread_id;
 }	t_philo;
 
 typedef struct	s_info {
@@ -88,9 +88,9 @@ int	initialize_info(t_info *info, int argc, char **argv)
 	while (idx < info->times.num_philos)
 	{
 		info->philo[idx].index = idx;
-		info->philo[idx].info = info;
 		info->philo[idx].count_eat = 0;
 		info->philo[idx].time_last_eat = 0;
+		info->philo[idx].info = info;
 		if (pthread_mutex_init(&info->forks[idx], NULL))
 		{
 			return (1);
@@ -152,12 +152,12 @@ void	*philosopher(void *data)
 	{
 		left_fork = 0;
 	}
+	if ((philo->index % 2) != 0)
+	{
+		usleep(200);
+	}
 	while ((f = food_on_table(philo)) != 0)
 	{
-		if ((philo->index % 2) != 0)
-		{
-			usleep(200);
-		}
 		pthread_mutex_lock(&philo->info->forks[right_fork]);
 		pthread_mutex_lock(&philo->info->forks[left_fork]);
 		if ((pass_time = get_time_ms()) == 0)
@@ -194,11 +194,11 @@ int	main(int argc, char **argv)
 	int		i;
 	t_info	info;
 
+	i = 0;
 	if (argc != 5 && argc != 6)
 	{
 		return (0);
 	}
-	i = 0;
 	if (initialize_info(&info, argc, argv))
 	{
 		return (0);
@@ -207,6 +207,8 @@ int	main(int argc, char **argv)
 	{
 		pthread_create(&info.philo[i].thread_id, NULL, philosopher, (void *)&info.philo[i]);
 	}
+	// monitoring_philosophers();
+	// finish_philosophers();
 	for (i = 0; i < info.times.num_philos; i++)
 	{
 		pthread_join(info.philo[i].thread_id, NULL);

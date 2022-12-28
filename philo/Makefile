@@ -4,7 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = main.c \
-	   ft_atoi.c \
+	   is_atoi.c ft_atoi.c \
 	   initialize_time.c is_collect_value.c
 
 INCLUDES_DIR = ./includes

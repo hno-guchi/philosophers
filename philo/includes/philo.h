@@ -6,7 +6,7 @@
 /*   By: hnoguchi <hnoguchi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:34:44 by hnoguchi          #+#    #+#             */
-/*   Updated: 2022/12/22 14:54:41 by hnoguchi         ###   ########.fr       */
+/*   Updated: 2022/12/28 10:57:00 by hnoguchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_time {
 	int	num_must_eat;
 }	t_time;
 
+bool	is_atoi(const char *str);
 int		ft_atoi(const char *str);
 void	initialize_time(t_time *rules, int argc, char **argv);
 bool	is_collect_value(t_time *rules);
