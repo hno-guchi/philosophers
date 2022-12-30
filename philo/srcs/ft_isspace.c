@@ -1,41 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_collect_value.c                                 :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnoguchi <hnoguchi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 19:10:14 by hnoguchi          #+#    #+#             */
-/*   Updated: 2022/12/22 14:59:37 by hnoguchi         ###   ########.fr       */
+/*   Created: 2022/10/18 16:52:01 by hnoguchi          #+#    #+#             */
+/*   Updated: 2022/12/30 15:16:43 by hnoguchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-
-bool	is_collect_value(t_time *rules)
+int	ft_isspace(int c)
 {
-	if (rules->num_philos <= 0)
+	if ((9 <= c && c <= 13) || c == 32)
 	{
-		return (false);
+		return (1);
 	}
-	if (rules->time_die <= 0)
-	{
-		return (false);
-	}
-	if (rules->time_eat <= 0)
-	{
-		return (false);
-	}
-	if (rules->time_sleep <= 0)
-	{
-		return (false);
-	}
-	if (rules->num_must_eat != -1)
-	{
-		if (rules->num_must_eat <= 0)
-		{
-			return (false);
-		}
-	}
-	return (true);
+	return (0);
 }

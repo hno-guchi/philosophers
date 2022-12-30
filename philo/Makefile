@@ -2,10 +2,17 @@ NAME = philo
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+LFLAGS = -lpthread
+TEST_FLAGS = -g -fsanitize=thread
 
 SRCS = main.c \
-	   is_atoi.c ft_atoi.c \
-	   initialize_time.c is_collect_value.c
+	   is_atoi.c \
+	   ft_isspace.c ft_isdigit.c ft_atoi.c \
+	   is_validation_args.c \
+	   set_info.c \
+	   get_time_ms.c \
+	   philosopher.c
+
 
 INCLUDES_DIR = ./includes
 SRCS_DIR = ./srcs
@@ -19,7 +26,7 @@ OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:%.c=%.o))
 all: $(NAME)
 
 $(NAME): $(OBJS_DIR) $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
+	$(CC) $(CFLAGS) $(LFLAGS) -o $@ $(OBJS)
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
@@ -39,7 +46,10 @@ re: fclean all
 
 norm:
 	norminette -v
-	norminette ./libft ./srcs/ ./includes | grep 'Error'
+	norminette ./srcs/ ./includes | grep 'Error'
 
 test_overflow: $(OBJS)
-	$(CC) -g -fsanitize=address -o $(NAME) $^ -L$(LIBFT_DIR) $(LIBFT_LIB)
+	$(CC) -g -fsanitize=address -o $@ $^
+
+test_thread: $(OBJS)
+	$(CC) $(TEST_FLAGS) -o $@ $^

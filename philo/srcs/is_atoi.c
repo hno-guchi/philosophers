@@ -6,12 +6,11 @@
 /*   By: hnoguchi <hnoguchi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:37:59 by hnoguchi          #+#    #+#             */
-/*   Updated: 2022/12/06 09:33:41 by hnoguchi         ###   ########.fr       */
+/*   Updated: 2022/12/30 15:24:40 by hnoguchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "push_swap.h"
+#include "ft_atoi.h"
 
 static bool	is_digits(const char *str)
 {
@@ -100,30 +99,3 @@ bool	is_atoi(const char *str)
 	}
 	return (is_change_format(&str[i], sign));
 }
-
-/*
-#include <stdio.h>
-// ./push_swap -2147483648 0 2147483647 -2147483649 2147483648
-// a2147a483d647a aaaa -1 -0 +11 ++10 -+10
-// printf(GREEN"[OK]"END); printf(" : is_digits();\n");
-int	main(int argc, char **argv)
-{
-	int	i;
-
-	i = 1;
-	while (i < argc)
-	{
-		if(is_atoi(argv[i]))
-		{
-			printf("argv[%2d] is [true]  (%14s); : ft_atoi(); = [%d]\n"
-			, i, argv[i], ft_atoi(argv[i]));
-		}
-		else
-		{
-			printf("argv[%2d] is [false] (%s)\n", i, argv[i]);
-		}
-		i += 1;
-	}
-	return (0);
-}
-*/
