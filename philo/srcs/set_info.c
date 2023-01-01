@@ -6,7 +6,7 @@
 /*   By: hnoguchi <hnoguchi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 19:10:14 by hnoguchi          #+#    #+#             */
-/*   Updated: 2023/01/01 15:46:15 by hnoguchi         ###   ########.fr       */
+/*   Updated: 2023/01/01 19:35:58 by hnoguchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	set_philo(t_info *info, t_philo *philos)
 		philos[idx].left_fork_index = idx + 1;
 		philos[idx].time_last_meal = info->time_start;
 		philos[idx].count_eat = 0;
-		philos[idx].died = 0;
+		// philos[idx].died = 0;
 		// philos[idx].full = false;
 		philos[idx].info = info;
 		if (pthread_mutex_init(&info->forks[idx], NULL) != 0)

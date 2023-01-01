@@ -6,7 +6,7 @@
 /*   By: hnoguchi <hnoguchi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 19:10:14 by hnoguchi          #+#    #+#             */
-/*   Updated: 2023/01/01 18:37:40 by hnoguchi         ###   ########.fr       */
+/*   Updated: 2023/01/01 20:18:15 by hnoguchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,68 @@ void	*monitoring_count_eat(void *data)
 	philos = info->philos;
 	while (1)
 	{
+		pthread_mutex_lock(&info->count_eat_mutex);
 		while (i < info->rules.num_philo)
 		{
-			pthread_mutex_
+			if (info->rules.eat_minimum_times <= philos[i]->count_eat)
+			{
+				i += 1;
+			}
+			else
+			{
+				break ;
+			}
+		}
+		pthread_mutex_unlock(&info->count_eat_mutex);
+		if (i == info->rules.num_philo)
+		{
+				philo->finish = ;
+		}
+
+
 
 			i += 1;
-		}
+		pthread_mutex_unlock(&info->count_eat_mutex);
 		i = 0;
 
 	}
+		while (i < info->rules.num_philo)
+		{
+			{
+				i += 1;
+			}
+			else
+			{
+				break ;
+			}
+		}
+		if (i == info->rules.num_philo)
+		{
+			pthread_mutex_lock(&info->died_mutex);
+			info->died = DEAD;
+			// printf(RED"Finish.\n"END);
+			pthread_mutex_unlock(&info->died_mutex);
+			return (NULL);
+		}
+		i = 0;
+	}
+	return (NULL);
+
 }
 */
+
+bool	is_over_eat_times(int limit, int count)
+{
+	if (limit == -1)
+	{
+		return (false);
+	}
+	if (count < limit)
+	{
+		return (false);
+	}
+	return (true);
+}
 
 void	*monitoring_death(void *data)
 {
@@ -73,7 +124,10 @@ void	*monitoring_death(void *data)
 			if (info->rules.time_die <= (current_time - philos[i].time_last_meal))
 			{
 				info->died = DEAD;
-				printf(RED"%lld	%d	is died.\n"END, (current_time - info->time_start), i);
+				if (!is_over_eat_times(info->rules.eat_minimum_times, philos[i].count_eat))
+				{
+					printf(RED"%lld	%d	is died\n"END, (current_time - info->time_start), i);
+				}
 				pthread_mutex_unlock(&info->died_mutex);
 				return (NULL);
 			}
@@ -200,24 +254,21 @@ int	main(int argc, char **argv)
 
 	if (!is_validation_args(argc, argv))
 	{
-		printf(RED"[Error]"END); printf(" : is_validation_args();\n");
 		return (0);
 	}
 	if (set_info(&info, argc, argv) == ERROR)
 	{
-		printf(RED"[Error]"END); printf(" : set_info();\n");
 		return (0);
 	}
 	if (create_threads(&info) == ERROR)
 	{
-		printf(RED"[Error]"END); printf(" : create_threads();\n");
 		destroy_all_mutex(&info);
 		return (0);
 	}
 	end_philosophers(&info);
-	// printf(GREEN"[OK]"END); printf(" : end_philosophers();\n");
 	return (0);
 }
 
+// printf(RED"%lld %d is died.\n"END, current_time, i);
 // printf(GREEN"[OK]"END); printf(" : function();\n");
 // printf(RED"[Error]"END); printf(" : ();\n");

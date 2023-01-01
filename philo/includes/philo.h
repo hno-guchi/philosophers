@@ -6,7 +6,7 @@
 /*   By: hnoguchi <hnoguchi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:34:44 by hnoguchi          #+#    #+#             */
-/*   Updated: 2023/01/01 16:48:26 by hnoguchi         ###   ########.fr       */
+/*   Updated: 2023/01/01 19:35:57 by hnoguchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct	s_philo {
 	int				left_fork_index;
 	long long		time_last_meal;
 	int				count_eat;
-	int				died;
+	// int				died;
 	// bool			full;
 	struct s_info	*info;
 }	t_philo;
