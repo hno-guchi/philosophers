@@ -6,7 +6,7 @@
 /*   By: hnoguchi <hnoguchi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:34:44 by hnoguchi          #+#    #+#             */
-/*   Updated: 2022/12/30 20:31:20 by hnoguchi         ###   ########.fr       */
+/*   Updated: 2023/01/01 16:48:26 by hnoguchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define SUCCESS 0
 # define ERROR 1
 # define DEAD 2
-# define FINISH true
+// # define FINISH true
 
 #include <pthread.h>
 #include <sys/time.h>
@@ -58,7 +58,8 @@ typedef struct	s_info {
 	int				died;
 	t_philo			philos[300];
 	pthread_t		threads[300];
-	pthread_t		monitor_thread;
+	pthread_t		death_monitor;
+	pthread_t		count_eat_monitor;
 	pthread_mutex_t	forks[300];
 	pthread_mutex_t	count_eat_mutex;
 	pthread_mutex_t	died_mutex;

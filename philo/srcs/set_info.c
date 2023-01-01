@@ -6,7 +6,7 @@
 /*   By: hnoguchi <hnoguchi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 19:10:14 by hnoguchi          #+#    #+#             */
-/*   Updated: 2022/12/30 20:31:06 by hnoguchi         ###   ########.fr       */
+/*   Updated: 2023/01/01 15:46:15 by hnoguchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ int	set_philo(t_info *info, t_philo *philos)
 	int	idx;
 
 	idx = 0;
-	while (idx < info->num_philo)
+	while (idx < info->rules.num_philo)
 	{
-		philos[idx]->index = idx;
-		philos[idx]->right_fork_index = idx;
-		philos[idx]->left_fork_index = idx + 1;
-		philos[idx]->time_last_meal = info->time_start;
-		philos[idx]->count_eat = 0;
-		philos[idx]->died = 0;
-		// philos[idx]->full = false;
-		philos[idx]->info = info;
+		philos[idx].index = idx;
+		philos[idx].right_fork_index = idx;
+		philos[idx].left_fork_index = idx + 1;
+		philos[idx].time_last_meal = info->time_start;
+		philos[idx].count_eat = 0;
+		philos[idx].died = 0;
+		// philos[idx].full = false;
+		philos[idx].info = info;
 		if (pthread_mutex_init(&info->forks[idx], NULL) != 0)
 		{
 			destroy_n_forks_mutex(info, idx);
@@ -62,7 +62,7 @@ int	set_philo(t_info *info, t_philo *philos)
 		}
 		idx += 1;
 	}
-	philos[idx - 1]->left_fork_index = 0;
+	philos[idx - 1].left_fork_index = 0;
 	return (SUCCESS);
 }
 
