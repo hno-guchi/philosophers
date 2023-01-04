@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_time_ms.c                                      :+:      :+:    :+:   */
+/*   only_one_philosopher.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnoguchi <hnoguchi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 19:10:14 by hnoguchi          #+#    #+#             */
-/*   Updated: 2023/01/04 10:34:37 by hnoguchi         ###   ########.fr       */
+/*   Updated: 2023/01/04 12:26:40 by hnoguchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long long	get_time_ms(void)
+void	*only_one_philosopher(void *data)
 {
-	struct timeval	time;
+	t_philo		*philo;
+	t_info		*info;
+	long long	time_ms;
 
-	if (gettimeofday(&time, NULL) == -1)
-	{
-		return (0);
-	}
-	return ((long long)(time.tv_sec * 1000) + (time.tv_usec / 1000));
+	philo = (t_philo *)data;
+	info = philo->info;
+	time_ms = get_time_ms();
+	pthread_mutex_lock(&info->forks[philo->right_fork_index]);
+	printf("%lld	%d	has taken a fork\n", time_ms - info->time_start,
+		philo->index);
+	pthread_mutex_unlock(&info->died_mutex);
+	finely_usleep(info->rules.time_die, time_ms);
+	time_ms = get_time_ms();
+	printf(RED"%lld	%d	is died\n"END,
+		(time_ms - info->time_start), philo->index);
+	return (NULL);
 }

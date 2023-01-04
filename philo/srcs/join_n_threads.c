@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.h                                          :+:      :+:    :+:   */
+/*   join_n_threads.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnoguchi <hnoguchi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 14:34:44 by hnoguchi          #+#    #+#             */
-/*   Updated: 2023/01/04 10:14:31 by hnoguchi         ###   ########.fr       */
+/*   Created: 2022/12/20 19:10:14 by hnoguchi          #+#    #+#             */
+/*   Updated: 2023/01/04 12:32:55 by hnoguchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ATOI_H
-# define FT_ATOI_H
+#include "philo.h"
 
-# include <limits.h>
-# include <stdbool.h>
+void	join_n_threads(t_info *info, int n)
+{
+	int	i;
 
-int	ft_isdigit(int c);
-int	ft_isspace(int c);
-
-#endif
+	i = 0;
+	while (i < n)
+	{
+		pthread_join(info->threads[i], NULL);
+		i += 1;
+	}
+}

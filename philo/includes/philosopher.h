@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.h                                          :+:      :+:    :+:   */
+/*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnoguchi <hnoguchi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:34:44 by hnoguchi          #+#    #+#             */
-/*   Updated: 2023/01/04 10:14:31 by hnoguchi         ###   ########.fr       */
+/*   Updated: 2023/01/04 11:04:08 by hnoguchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ATOI_H
-# define FT_ATOI_H
+#ifndef PHILOSOPHER_H
+# define PHILOSOPHER_H
 
-# include <limits.h>
-# include <stdbool.h>
-
-int	ft_isdigit(int c);
-int	ft_isspace(int c);
+bool	is_info_died(t_info *info);
+bool	is_eaten_at_least_n_times(t_info *info, t_philo *philo);
+bool	is_finish(t_info *info, t_philo *philo);
+void	finely_usleep(int limit, long long base);
+void	try_usleep_200(int index);
 
 #endif

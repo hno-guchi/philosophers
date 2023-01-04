@@ -9,9 +9,12 @@ SRCS = main.c \
 	   is_atoi.c \
 	   ft_isspace.c ft_isdigit.c ft_atoi.c \
 	   is_validation_args.c \
-	   set_info.c \
+	   destroy_all_mutex.c destroy_n_forks_mutex.c join_n_threads.c \
+	   set_info.c set_rules.c \
 	   get_time_ms.c \
-	   philosopher.c
+	   create_threads.c \
+	   only_one_philosopher.c philosopher.c philosopher_util.c \
+	   monitoring_death.c
 
 
 INCLUDES_DIR = ./includes

@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.h                                          :+:      :+:    :+:   */
+/*   destroy_n_forks_mutex.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnoguchi <hnoguchi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 14:34:44 by hnoguchi          #+#    #+#             */
-/*   Updated: 2023/01/04 10:14:31 by hnoguchi         ###   ########.fr       */
+/*   Created: 2022/12/20 19:10:14 by hnoguchi          #+#    #+#             */
+/*   Updated: 2023/01/04 12:30:58 by hnoguchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ATOI_H
-# define FT_ATOI_H
+#include "philo.h"
 
-# include <limits.h>
-# include <stdbool.h>
+void	destroy_n_forks_mutex(t_info *info, int n)
+{
+	int	i;
 
-int	ft_isdigit(int c);
-int	ft_isspace(int c);
-
-#endif
+	i = 0;
+	while (i < n)
+	{
+		pthread_mutex_destroy(&info->forks[i]);
+		i += 1;
+	}
+}
